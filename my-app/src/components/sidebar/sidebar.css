@@ -1,0 +1,18 @@
+.parent{
+}
+
+.blocks{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+}
+
+.blocks div{
+    background-color: white;
+    margin: 5px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    border-radius: 3px;
+    cursor: pointer;
+}
