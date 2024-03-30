@@ -1,13 +1,13 @@
-.parent{
-}
 
-.blocks{
+.inputs{
     display: flex;
     flex-direction: column;
     justify-content: left;
+    background-color: gray;
+    height: 100vh;
 }
 
-.blocks div{
+.input{
     background-color: white;
     margin: 5px;
     padding: 10px;
