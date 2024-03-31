@@ -1,3 +1,3 @@
-.page{
-    background-color: teal;
+.selected{
+    border: 1px solid red;
 }

@@ -1,3 +1,8 @@
+*{
+  font-family: 'poppins';
+  box-sizing: border-box;
+}
+
 .app{
   display: flex;
   box-sizing: border-box;

@@ -13,9 +13,9 @@ export default function App() {
     { id: 3, type: "button", title: "Button" },
   ]);
 
-  const [droppedElements, setDroppedElements] = useState([]); // Array to store dropped elements
-  const [selectedElement, setSelectedElement] = useState(null); // Stores currently selected element
-  const [currentElement, setCurrentElement] = useState(null); // Stores currently selected element
+  const [currentElement, setCurrentElement] = useState(null);
+  const [droppedElements, setDroppedElements] = useState([]);
+  const [selectedElement, setSelectedElement] = useState(null);
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -24,53 +24,47 @@ export default function App() {
       coordinateGetter: sortableKeyboardCoordinates,
     }),
   );
+  const { offset } = useSensor();
+  console.log(offset);
 
   const handleDrop = (event) => {
+    
     const { active } = event;
-    // console.log(event.activatorEvent);
-    // if (active.type === "ITEM") {
+
       const droppedData = inputs.find((input) => input.id === active.id);
       const { clientX, clientY } = event.activatorEvent;
-      // console.log(clientX, clientY);
-      // console.log(droppedData);
-      setDroppedElements([...droppedElements, { ...droppedData, x: clientX, y: clientY, config: {} }]);
       setCurrentElement({...droppedElements,  ...droppedData, x: clientX, y: clientY, config: {} });
-      setSelectedElement({ ...droppedData, x: clientX, y: clientY, config: {} }); // Open modal for configuration
-    // }
   };
 
-// console.log();
-// console.log(selectedElement);
+// console.log(droppedElements);
   const handleSelectElement = (id) => {
+    if(selectedElement){
+      setSelectedElement(null)
+    } else {
     setSelectedElement(droppedElements.find((element) => element.id === id));
+    
+    }
   };
 
-  const handleSaveConfig = (config) => {
-    setDroppedElements(
-      droppedElements.map((element) =>
-        element.id === selectedElement.id ? { ...element, config } : element
-      )
-    );
-    setSelectedElement(null); // Close modal after saving
-  };
 
   const handleCloseModal = () => {
-    setSelectedElement(null);
+    setCurrentElement(null);
   };
 
   const handleDeleteElement = (id) => {
     setDroppedElements(droppedElements.filter((element) => element.id !== id));
-    setSelectedElement(null); // Deselect after deletion
+    setSelectedElement(null); 
   };
 
   const handleKeyPress = (event, element) => {
+    console.log(element, event);
     if (event.key === "Enter" && element) {
-      setSelectedElement(element); // Open modal for editing
+      setCurrentElement(droppedElements.find((el) => el.id === element.id)); 
     } else if (event.key === "Delete" && element) {
       handleDeleteElement(element.id);
     }
   };
-
+// console.log(currentElement);
   // Save to local storage (optional for persistence)
   useEffect(() => {
     localStorage.setItem("droppedElements", JSON.stringify(droppedElements));
@@ -88,12 +82,12 @@ export default function App() {
     <div className="app">
       <DndContext sensors={sensors} collisionDetection={closestCorners} onDragEnd={handleDrop}>
         <div className="page">
-          <Page
+          {droppedElements.length > 0 && (<Page
             droppedElements={droppedElements}
             handleSelectElement={handleSelectElement}
             selectedElement={selectedElement}
             handleKeyPress={handleKeyPress}
-          />
+          />)}
         </div>
 
         <div className="sidebar">
@@ -103,8 +97,11 @@ export default function App() {
       </DndContext>
 
       {currentElement && (
-        <Modal element={currentElement} onSave={handleSaveConfig} onClose={handleCloseModal} />
+        <Modal element={currentElement} setDroppedElements={setDroppedElements} onClose={handleCloseModal}  />
       )}
     </div>
   );
 }
+
+
+
