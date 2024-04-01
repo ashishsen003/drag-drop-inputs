@@ -9,15 +9,19 @@ This repository provides a React application demonstrating drag-and-drop functio
 - Optionally configure dropped elements (e.g., edit text labels) using a modal window (not fully implemented yet).
 
 ### App will look like:
-![Screenshot 2024-04-01 220923](https://github.com/ashishsen003/drag-drop-inputs/assets/112822104/738438cf-33a5-453d-84af-4a8b79a55659)
-![Screenshot 2024-04-01 220435](https://github.com/ashishsen003/drag-drop-inputs/assets/112822104/d453753b-0005-47ec-88d4-5feb2fc916b6)
-![Screenshot 2024-04-01 220419](https://github.com/ashishsen003/drag-drop-inputs/assets/112822104/120dc94c-2919-4e11-ad37-9cda8f9e3db3)
-![Screenshot 2024-04-01 220358](https://github.com/ashishsen003/drag-drop-inputs/assets/112822104/56b9773b-4a14-4748-9e0c-36784a07b1f9)
-![Screenshot 2024-04-01 220340](https://github.com/ashishsen003/drag-drop-inputs/assets/112822104/4ff04804-e8ae-4c40-8792-5e67304a72a5)
-![Screenshot 2024-04-01 220310](https://github.com/ashishsen003/drag-drop-inputs/assets/112822104/3715e3aa-b1e2-47e5-b50a-ff6d74c8d348)
-![Screenshot 2024-04-01 220215](https://github.com/ashishsen003/drag-drop-inputs/assets/112822104/95797288-c77c-4a82-8f9f-54c90e6e6b74)
-![Screenshot 2024-04-01 220042](https://github.com/ashishsen003/drag-drop-inputs/assets/112822104/247ab37a-0891-4e0c-8f8b-22f5120ffdcd)
 ![Screenshot 2024-04-01 220022](https://github.com/ashishsen003/drag-drop-inputs/assets/112822104/29e7e9a1-0422-4250-a678-02a9110de462)
+![Screenshot 2024-04-01 220042](https://github.com/ashishsen003/drag-drop-inputs/assets/112822104/247ab37a-0891-4e0c-8f8b-22f5120ffdcd)
+![Screenshot 2024-04-01 220215](https://github.com/ashishsen003/drag-drop-inputs/assets/112822104/95797288-c77c-4a82-8f9f-54c90e6e6b74)
+![Screenshot 2024-04-01 220310](https://github.com/ashishsen003/drag-drop-inputs/assets/112822104/3715e3aa-b1e2-47e5-b50a-ff6d74c8d348)
+![Screenshot 2024-04-01 220340](https://github.com/ashishsen003/drag-drop-inputs/assets/112822104/4ff04804-e8ae-4c40-8792-5e67304a72a5)
+![Screenshot 2024-04-01 220358](https://github.com/ashishsen003/drag-drop-inputs/assets/112822104/56b9773b-4a14-4748-9e0c-36784a07b1f9)
+![Screenshot 2024-04-01 220419](https://github.com/ashishsen003/drag-drop-inputs/assets/112822104/120dc94c-2919-4e11-ad37-9cda8f9e3db3)
+![Screenshot 2024-04-01 220435](https://github.com/ashishsen003/drag-drop-inputs/assets/112822104/d453753b-0005-47ec-88d4-5feb2fc916b6)
+![Screenshot 2024-04-01 220923](https://github.com/ashishsen003/drag-drop-inputs/assets/112822104/738438cf-33a5-453d-84af-4a8b79a55659)
+
+
+
+
 
 
 ### Getting Started:
