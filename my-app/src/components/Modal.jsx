@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { IoClose } from "react-icons/io5";
 import '../styles/modal.css'
 
-const Modal = ({ element, setDroppedElements, onClose }) => {
+const Modal = ({ element, setDroppedElements, droppedElements, onClose }) => {
   const modalRef = useRef()
 
   const closeModal = (e)=>{
@@ -15,19 +15,30 @@ const Modal = ({ element, setDroppedElements, onClose }) => {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    console.log(name, value);
     setEditedElement((prevElement) => ({
       ...prevElement,
       [name]: value
     }));
   };
-
-  const handleSubmit = (event) => {
-
-    setDroppedElements((prev)=>{
-      return [...prev, {...editedElement, key: prev.length+1}]
-    })
-    onClose()
+// console.log(editedElement);
+  const handleSubmit = (key) => {
+    // const elementPresent = droppedElements?.filter((ele)=>ele.key === key)
+    // const elementNotPresent = droppedElements?.filter((ele)=>ele.key !== key)
+    // const indexOfPresentElement = droppedElements.indexOf(elementPresent)
+    // console.log(indexOfPresentElement);
+    // console.log(isElementPresent);
+    
+    // console.log(event);
+    // setEditedElement(null)
+    setDroppedElements((prev) => {
+      // const newElement = { ...editedElement, key: prev.length + 1 }; 
+      // if(isElementPresent)
+      // if(elementPresent){
+      //   return [prev, ...editedElement ];
+      // }
+      return [...prev, {...editedElement, key: prev.length + 1}];
+    });
+    onClose();
   };
 
 
@@ -78,8 +89,8 @@ const Modal = ({ element, setDroppedElements, onClose }) => {
       {element.type === "button" && (
         <>
           <div className="input__div">
-            <labe>Button Name</labe>
-            <input type="text" name="buttonText" value={element.buttonText} placeholder='type here' onChange={handleInputChange} />
+            <label>Button Name</label>
+            <input type="text" name="buttonText" value={editedElement.buttonText} placeholder='type here' onChange={handleInputChange} />
           </div>
           <div className="input__div">
             <label>X</label>
@@ -91,7 +102,7 @@ const Modal = ({ element, setDroppedElements, onClose }) => {
           </div>
         </>
       )}
-      <button onClick={handleSubmit} className="save__btn" >Save Changes</button>
+      <button onClick={()=>handleSubmit(element.key)} className="save__btn" >Save Changes</button>
       </div>
     </div>
   );

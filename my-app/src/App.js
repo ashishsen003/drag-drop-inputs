@@ -5,13 +5,13 @@ import Page from "./components/Page";
 import Modal from "./components/Modal";
 import "./App.css";
 import { sortableKeyboardCoordinates } from "@dnd-kit/sortable";
-import { useMousePosition } from './hooks/useMousePosition';
+import { useThrottledMousePosition } from './hooks/useMousePosition';
 
 export default function App() {
   const [inputs, setInputs] = useState([
-    { id: 1, type: "label", title: "Label" },
-    { id: 2, type: "input", title: "Input", placeholder: "" },
-    { id: 3, type: "button", title: "Button" },
+    {  id:1, type: "label", title: "Label" },
+    {  id:2, type: "input", title: "Input", placeholder: "" },
+    {  id:3, type: "button", title: "Button" },
   ]);
 
   const [currentElement, setCurrentElement] = useState(null);
@@ -26,24 +26,27 @@ export default function App() {
     }),
   );
 
-  const mousePosition = useMousePosition();
-  const { x, y } = mousePosition 
-  // console.log(x, y);
+    const mousePosition = useThrottledMousePosition();
+    const { x, y } = mousePosition
+
+
+
+  
 
   function handleDrop (event) {
-    console.log(event);
     const { active } = event;
 
       const droppedData = inputs.find((input) => input.id === active.id);
-      const { clientX, clientY } = event.activatorEvent;
-      setCurrentElement({...droppedElements,  ...droppedData, x: x, y: y, config: {} });
-  };
+      setCurrentElement({...droppedData, x: x, y: y});
+    };
 
-  const handleSelectElement = (id) => {
-    if(selectedElement){
+
+
+  const handleSelectElement = (key) => {
+    if(selectedElement && selectedElement.key === key){
       setSelectedElement(null)
     } else {
-    setSelectedElement(droppedElements.find((element) => element.id === id));
+    setSelectedElement(droppedElements.find((element) => element.key === key));
     
     }
   };
@@ -53,17 +56,17 @@ export default function App() {
     setCurrentElement(null);
   };
 
-  const handleDeleteElement = (id) => {
-    setDroppedElements(droppedElements.filter((element) => element.id !== id));
+  const handleDeleteElement = (key) => {
+    setDroppedElements(droppedElements.filter((element) => element.key !== key));
     setSelectedElement(null); 
   };
 
   const handleKeyPress = (event, element) => {
-    console.log(element, event);
+    // console.log(element, event);
     if (event.key === "Enter" && element) {
-      setCurrentElement(droppedElements.find((el) => el.id === element.id)); 
+      setCurrentElement(droppedElements.find((el) => el.key === element.key)); 
     } else if (event.key === "Delete" && element) {
-      handleDeleteElement(element.id);
+      handleDeleteElement(element.key);
     }
   };
   useEffect(() => {
@@ -95,7 +98,9 @@ export default function App() {
       </DndContext>
 
       {currentElement && (
-        <Modal element={currentElement} setDroppedElements={setDroppedElements} onClose={handleCloseModal}  />
+        <Modal element={currentElement} setDroppedElements={setDroppedElements} onClose={handleCloseModal} 
+        droppedElements={droppedElements}
+        />
       )}
     </div>
   );

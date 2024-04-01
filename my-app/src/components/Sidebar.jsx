@@ -15,8 +15,8 @@ const Sidebar = ({ inputs }) => {
       <h3>BLOCKS</h3>
       <SortableContext items={inputs} strategy={horizontalListSortingStrategy}>
         <div className="inputs">
-        {inputs.map((input) => {
-          return <Input id={input.id} title={input.title} key={input.id} />;
+        {inputs.map((input, i) => {
+          return <Input id={input.id} title={input.title} key={i+1} />;
         })}
         </div>
       </SortableContext>
