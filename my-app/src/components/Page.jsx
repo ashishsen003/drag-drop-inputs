@@ -3,31 +3,20 @@ import '../styles/page.css';
 import useDragCoordinates from "../hooks/useMousePosition";
 import { useSensor } from "@dnd-kit/core";
 
+const Page = ({droppedElements,handleSelectElement,selectedElement,  handleKeyPress})=>{
 
-const Page = ({
-  droppedElements,
-  handleSelectElement,
-  selectedElement,  
-  handleKeyPress,
-}) => {
 
-  const [activeCoordinates, setActiveCoordinates] = useState(null);
-  const { active, offset } = useSensor();
+  useEffect(()=>{
+    console.log('loaded');
+  },[droppedElements])
 
-  useEffect(() => {
-    if (active) {
-      setActiveCoordinates({ x: offset.x, y: offset.y });
-    } else {
-      setActiveCoordinates(null);
-    }
-  }, [active, offset]);
-  
+
   return (
     <div className="page-container">
       {droppedElements.map((element) => (
         <div
-          key={element.id}
-          className={`${selectedElement?.id === element.id ? "selected" : "" }`}
+          key={element.key}
+          className={`${selectedElement?.key === element.key ? "selected" : "" }`}
           style={{
             position: "absolute",
             left: `${element.x}px`,
@@ -35,7 +24,7 @@ const Page = ({
             fontWeight: `${element.weight}`,
             fontSize: `${element.size}px`,
           }}
-          onClick={() => handleSelectElement(element.id)}
+          onClick={() => handleSelectElement(element.key)}
           onKeyDown={(event) => handleKeyPress(event, element)} 
           tabIndex={0} 
         >
