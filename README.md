@@ -10,7 +10,7 @@ This repository provides a React application demonstrating drag-and-drop functio
 
 ### App will look like:
 ![Screenshot 2024-04-01 220022](https://github.com/ashishsen003/drag-drop-inputs/assets/112822104/29e7e9a1-0422-4250-a678-02a9110de462)
-- draging an element
+- dragging an element
 ![Screenshot 2024-04-01 220042](https://github.com/ashishsen003/drag-drop-inputs/assets/112822104/247ab37a-0891-4e0c-8f8b-22f5120ffdcd)
 ![Screenshot 2024-04-01 220310](https://github.com/ashishsen003/drag-drop-inputs/assets/112822104/3715e3aa-b1e2-47e5-b50a-ff6d74c8d348)
 ![Screenshot 2024-04-01 220358](https://github.com/ashishsen003/drag-drop-inputs/assets/112822104/56b9773b-4a14-4748-9e0c-36784a07b1f9)
