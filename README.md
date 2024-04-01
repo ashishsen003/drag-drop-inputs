@@ -52,7 +52,7 @@ The codebase is organized into the following components:
 ### Using the Application:
 - Drag and drop UI elements from the sidebar onto the designated page area.
 - The dropped elements will appear with visual feedback indicating their selection state.
-- (Future functionality) Clicking a dropped element should open a modal window for configuration (not fully implemented yet).
+- (Future functionality) Clicking a dropped element should open a configuration modal to relocate on the page  (not fully implemented yet).
 
 ### Future Enhancements:
 - Implement full functionality for editing dropped elements through the modal window.
