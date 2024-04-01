@@ -1,10 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
-import { DndContext, KeyboardSensor, PointerSensor, TouchSensor, closestCorners, useSensor, useSensors } from "@dnd-kit/core";
+import { DndContext, KeyboardSensor, PointerSensor, TouchSensor, closestCenter, closestCorners, useSensor, useSensors } from "@dnd-kit/core";
 import Sidebar from "./components/Sidebar";
 import Page from "./components/Page";
 import Modal from "./components/Modal";
 import "./App.css";
 import { sortableKeyboardCoordinates } from "@dnd-kit/sortable";
+import { useMousePosition } from './hooks/useMousePosition';
 
 export default function App() {
   const [inputs, setInputs] = useState([
@@ -24,19 +25,20 @@ export default function App() {
       coordinateGetter: sortableKeyboardCoordinates,
     }),
   );
-  const { offset } = useSensor();
-  console.log(offset);
 
-  const handleDrop = (event) => {
-    
+  const mousePosition = useMousePosition();
+  const { x, y } = mousePosition 
+  // console.log(x, y);
+
+  function handleDrop (event) {
+    console.log(event);
     const { active } = event;
 
       const droppedData = inputs.find((input) => input.id === active.id);
       const { clientX, clientY } = event.activatorEvent;
-      setCurrentElement({...droppedElements,  ...droppedData, x: clientX, y: clientY, config: {} });
+      setCurrentElement({...droppedElements,  ...droppedData, x: x, y: y, config: {} });
   };
 
-// console.log(droppedElements);
   const handleSelectElement = (id) => {
     if(selectedElement){
       setSelectedElement(null)
@@ -64,13 +66,10 @@ export default function App() {
       handleDeleteElement(element.id);
     }
   };
-// console.log(currentElement);
-  // Save to local storage (optional for persistence)
   useEffect(() => {
     localStorage.setItem("droppedElements", JSON.stringify(droppedElements));
   }, [droppedElements]);
 
-  // Load from local storage (optional for persistence)
   useEffect(() => {
     const storedElements = JSON.parse(localStorage.getItem("droppedElements"));
     if (storedElements) {
@@ -80,7 +79,7 @@ export default function App() {
 
   return (
     <div className="app">
-      <DndContext sensors={sensors} collisionDetection={closestCorners} onDragEnd={handleDrop}>
+      <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDrop}>
         <div className="page">
           {droppedElements.length > 0 && (<Page
             droppedElements={droppedElements}
@@ -90,8 +89,7 @@ export default function App() {
           />)}
         </div>
 
-        <div className="sidebar">
-          <h3>BLOCKS</h3>
+        <div className="sidebar">          
           <Sidebar inputs={inputs} />
         </div>
       </DndContext>

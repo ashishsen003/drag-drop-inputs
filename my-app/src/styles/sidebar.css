@@ -1,16 +1,22 @@
+.sidebar-container > h3{
+    padding-left: 2px;
+}
+
 
 .inputs{
     display: flex;
     flex-direction: column;
     justify-content: left;
-    background-color: gray;
-    height: 100vh;
+    /* background-color: gray; */
+    padding: 5px 0px;
+    margin-top: 15px;
+    /* height: 100vh; */
 }
 
 .input{
-    background-color: white;
+    background-color:whitesmoke;
     margin: 5px;
-    padding: 10px;
+    padding: 8px;
     display: flex;
     align-items: center;
     border-radius: 3px;

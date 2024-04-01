@@ -7,7 +7,7 @@ const Modal = ({ element, setDroppedElements, onClose }) => {
 
   const closeModal = (e)=>{
     if(modalRef.current === e.target){
-      onClose()
+      onClose() 
     }
   }
 

@@ -1,6 +1,8 @@
 *{
   font-family: 'poppins';
   box-sizing: border-box;
+  padding: 0px;
+  margin: 0px;
 }
 
 .app{
@@ -15,7 +17,7 @@
 }
 .sidebar{
   width:15%;
-  background-color: gray;
+  background-color: rgb(80, 80, 80);
   height: 100vh;
   padding: 10px;
 }

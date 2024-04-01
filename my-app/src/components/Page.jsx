@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import '../styles/page.css';
-import useDragCoordinates from "./DragCoordinates";
+import useDragCoordinates from "../hooks/useMousePosition";
 import { useSensor } from "@dnd-kit/core";
 
 
@@ -10,15 +10,9 @@ const Page = ({
   selectedElement,  
   handleKeyPress,
 }) => {
-  // console.log(droppedElements[0].x, droppedElements[0].y);
-
-  // const [droppedElements, setDroppedElements] = useState([]);
-  // ... other state variables
 
   const [activeCoordinates, setActiveCoordinates] = useState(null);
   const { active, offset } = useSensor();
-
-  const coordinates = useDragCoordinates(); 
 
   useEffect(() => {
     if (active) {
@@ -35,11 +29,9 @@ const Page = ({
           key={element.id}
           className={`${selectedElement?.id === element.id ? "selected" : "" }`}
           style={{
-            left: `${coordinates?.x || element.x}px`,
-            top: `${coordinates?.y || element.y}px`,
             position: "absolute",
-            // left: `900px`,
-            // top: `900px`,
+            left: `${element.x}px`,
+            top: `${element.y}px`,
             fontWeight: `${element.weight}`,
             fontSize: `${element.size}px`,
           }}

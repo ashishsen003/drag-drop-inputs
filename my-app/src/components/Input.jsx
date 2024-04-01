@@ -2,6 +2,7 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import React from "react";
 import { MdDragIndicator } from "react-icons/md";
+import '../styles/input.css'
 
 const Input = ({ id, title }) => {
   const { attributes, listeners, setNodeRef, transform, transition } =
@@ -16,7 +17,7 @@ const Input = ({ id, title }) => {
       style={style}
       className="input"
     >
-      <MdDragIndicator />
+      <MdDragIndicator className="icon" />
       {title}
     </div>
   );
