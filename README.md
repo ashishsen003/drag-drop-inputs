@@ -14,7 +14,7 @@ This repository provides a React application demonstrating drag-and-drop functio
 ![Screenshot 2024-04-01 220042](https://github.com/ashishsen003/drag-drop-inputs/assets/112822104/247ab37a-0891-4e0c-8f8b-22f5120ffdcd)
 ![Screenshot 2024-04-01 220310](https://github.com/ashishsen003/drag-drop-inputs/assets/112822104/3715e3aa-b1e2-47e5-b50a-ff6d74c8d348)
 ![Screenshot 2024-04-01 220358](https://github.com/ashishsen003/drag-drop-inputs/assets/112822104/56b9773b-4a14-4748-9e0c-36784a07b1f9)
-- on droping
+- on droping (modal will open to configure an element)
 ![Screenshot 2024-04-01 220215](https://github.com/ashishsen003/drag-drop-inputs/assets/112822104/95797288-c77c-4a82-8f9f-54c90e6e6b74)
 - after drop
 ![Screenshot 2024-04-01 220340](https://github.com/ashishsen003/drag-drop-inputs/assets/112822104/4ff04804-e8ae-4c40-8792-5e67304a72a5)
