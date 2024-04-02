@@ -10,3 +10,7 @@
 input{
     outline: none;
 }
+
+.elements{
+    cursor:grab;
+}

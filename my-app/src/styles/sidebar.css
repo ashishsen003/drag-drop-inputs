@@ -1,5 +1,10 @@
+.sidebar-container{
+    margin: 0 .5rem 0 .5rem;
+}
+
 .sidebar-container > h3{
     padding-left: 2px;
+    /* margin: ; */
 }
 
 
@@ -8,17 +13,19 @@
     flex-direction: column;
     justify-content: left;
     /* background-color: gray; */
-    padding: 5px 0px;
+    padding: 0px 0px;
     margin-top: 15px;
     /* height: 100vh; */
+    gap: 1.5rem;
 }
 
 .input{
     background-color:whitesmoke;
-    margin: 5px;
-    padding: 8px;
+    /* margin: 8px; */
+    padding: .6rem;
     display: flex;
     align-items: center;
     border-radius: 3px;
-    cursor: pointer;
+    cursor:grab;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }

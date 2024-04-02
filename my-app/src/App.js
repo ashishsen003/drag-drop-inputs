@@ -1,17 +1,26 @@
 import React, { useState, useRef, useEffect } from "react";
-import { DndContext, KeyboardSensor, PointerSensor, TouchSensor, closestCenter, closestCorners, useSensor, useSensors } from "@dnd-kit/core";
+import {
+  DndContext,
+  KeyboardSensor,
+  PointerSensor,
+  TouchSensor,
+  closestCenter,
+  closestCorners,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
 import Sidebar from "./components/Sidebar";
 import Page from "./components/Page";
 import Modal from "./components/Modal";
 import "./App.css";
 import { sortableKeyboardCoordinates } from "@dnd-kit/sortable";
-import { useThrottledMousePosition } from './hooks/useMousePosition';
+import { useThrottledMousePosition } from "./hooks/useMousePosition";
 
 export default function App() {
   const [inputs, setInputs] = useState([
-    {  id:1, type: "label", title: "Label" },
-    {  id:2, type: "input", title: "Input", placeholder: "" },
-    {  id:3, type: "button", title: "Button" },
+    { id: 1, type: "label", title: "Label" },
+    { id: 2, type: "input", title: "Input", placeholder: "" },
+    { id: 3, type: "button", title: "Button" },
   ]);
 
   const [currentElement, setCurrentElement] = useState(null);
@@ -23,55 +32,48 @@ export default function App() {
     useSensor(TouchSensor),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
-    }),
+    })
   );
 
-    const mousePosition = useThrottledMousePosition();
-    const { x, y } = mousePosition
+  const mousePosition = useThrottledMousePosition();
+  const { x, y } = mousePosition;
 
-
-
-  
-
-  function handleDrop (event) {
+  function handleDrop(event) {
     const { active } = event;
 
-      const droppedData = inputs.find((input) => input.id === active.id);
-      setCurrentElement({...droppedData, x: x, y: y});
-    };
-
-
+    const droppedData = inputs.find((input) => input.id === active.id);
+    const droppedDataWithCoordinates = { ...droppedData, x: x, y: y };
+    setCurrentElement({ ...droppedData, x: x, y: y });
+  }
 
   const handleSelectElement = (key) => {
-    if(selectedElement && selectedElement.key === key){
-      setSelectedElement(null)
+    if (selectedElement && selectedElement.key === key) {
+      setSelectedElement(null);
     } else {
-    setSelectedElement(droppedElements.find((element) => element.key === key));
-    
+      setSelectedElement(
+        droppedElements.find((element) => element.key === key)
+      );
     }
   };
-
 
   const handleCloseModal = () => {
     setCurrentElement(null);
   };
 
   const handleDeleteElement = (key) => {
-    setDroppedElements(droppedElements.filter((element) => element.key !== key));
-    setSelectedElement(null); 
+    setDroppedElements(
+      droppedElements.filter((element) => element.key !== key)
+    );
+    setSelectedElement(null);
   };
 
   const handleKeyPress = (event, element) => {
-    // console.log(element, event);
     if (event.key === "Enter" && element) {
-      setCurrentElement(droppedElements.find((el) => el.key === element.key)); 
+      setCurrentElement(droppedElements.find((el) => el.key === element.key));
     } else if (event.key === "Delete" && element) {
       handleDeleteElement(element.key);
     }
   };
-  useEffect(() => {
-    localStorage.setItem("droppedElements", JSON.stringify(droppedElements));
-  }, [droppedElements]);
 
   useEffect(() => {
     const storedElements = JSON.parse(localStorage.getItem("droppedElements"));
@@ -82,29 +84,35 @@ export default function App() {
 
   return (
     <div className="app">
-      <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDrop}>
+      <DndContext
+        sensors={sensors}
+        collisionDetection={closestCenter}
+        onDragEnd={handleDrop}
+      >
         <div className="page">
-          {droppedElements.length > 0 && (<Page
-            droppedElements={droppedElements}
-            handleSelectElement={handleSelectElement}
-            selectedElement={selectedElement}
-            handleKeyPress={handleKeyPress}
-          />)}
+          {droppedElements.length > 0 && (
+            <Page
+              droppedElements={droppedElements}
+              handleSelectElement={handleSelectElement}
+              selectedElement={selectedElement}
+              handleKeyPress={handleKeyPress}
+            />
+          )}
         </div>
 
-        <div className="sidebar">          
+        <div className="sidebar">
           <Sidebar inputs={inputs} />
         </div>
       </DndContext>
 
       {currentElement && (
-        <Modal element={currentElement} setDroppedElements={setDroppedElements} onClose={handleCloseModal} 
-        droppedElements={droppedElements}
+        <Modal
+          element={currentElement}
+          setDroppedElements={setDroppedElements}
+          onClose={handleCloseModal}
+          droppedElements={droppedElements}
         />
       )}
     </div>
   );
 }
-
-
-

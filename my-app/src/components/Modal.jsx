@@ -36,6 +36,8 @@ const Modal = ({ element, setDroppedElements, droppedElements, onClose }) => {
       // if(elementPresent){
       //   return [prev, ...editedElement ];
       // }
+      const edited = {...editedElement, key: prev.length + 1}
+      localStorage.setItem("droppedElements", JSON.stringify([...droppedElements, edited]));
       return [...prev, {...editedElement, key: prev.length + 1}];
     });
     onClose();

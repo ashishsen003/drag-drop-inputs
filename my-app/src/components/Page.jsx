@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import '../styles/page.css';
-import useDragCoordinates from "../hooks/useMousePosition";
-import { useSensor } from "@dnd-kit/core";
 
 const Page = ({droppedElements,handleSelectElement,selectedElement,  handleKeyPress})=>{
 
@@ -23,21 +21,22 @@ const Page = ({droppedElements,handleSelectElement,selectedElement,  handleKeyPr
             top: `${element.y}px`,
             fontWeight: `${element.weight}`,
             fontSize: `${element.size}px`,
+            cursor: 'grab'
           }}
           onClick={() => handleSelectElement(element.key)}
           onKeyDown={(event) => handleKeyPress(event, element)} 
           tabIndex={0} 
         >
           {element.type === "label" && (
-            <label>{element.labelText || 'This is a label'}</label>
+            <label className="elements">{element.labelText || 'This is a label'}</label>
           )}
 
           {element.type === "input" && (
-            <input type="text" placeholder={element.inputText || ""} /> 
+            <input className="elements" type="text" placeholder={element.inputText || ""} /> 
           )}
 
           {element.type === "button" && (
-            <button>{element.buttonText || "Button"}</button>
+            <button className="elements">{element.buttonText || "Button"}</button>
           )}
         </div>
       ))}
